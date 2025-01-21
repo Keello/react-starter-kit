@@ -1,18 +1,19 @@
-import js from '@eslint/js'
-import globals from 'globals'
+import js from '@eslint/js';
+import globals from 'globals';
 
 import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks'
+import reactHooks from 'eslint-plugin-react-hooks';
 import reactImport from 'eslint-plugin-import';
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import jest from 'eslint-plugin-jest';
 import prettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended, ...jest.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       globals: {
@@ -31,6 +32,7 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-import': reactImport,
       'react-refresh': reactRefresh,
+      jest,
       prettier,
     },
     rules: {
@@ -57,10 +59,7 @@ export default tseslint.config(
       'react-hooks/exhaustive-deps': 'off',
       'max-lines': ['warn', { max: 400, skipComments: true }],
       'react/jsx-no-target-blank': 'off',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
-  },
-)
+  }
+);
